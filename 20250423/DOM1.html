@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .text-pink {
+      color: pink
+    }
+    .text-pink::before {
+      content: 'pink before';
+      color: deeppink
+    }
+  </style>
+</head>
+<body>
+  <h1 id="title">Tralalero Tralala</h1>
+  <h2>
+    <i>111</i>
+  </h2>
+  <h2>
+    <i>222</i>
+  </h2>
+  <h3 class="text-red">aaa</h3>
+  <h3 class="text-red">bbb</h3>
+  <h3 class="text-center">aaa</h3>
+  <h3 class="text-center">bbb</h3>
+  <h3 class="text-pink">aaa</h3>
+  <div>
+    <h4>1</h4>
+    <h4>2</h4>
+    <h4>3</h4>
+    <h4>4</h4>
+    <h4>5</h4>
+  </div>
+  <script>
+    // 用 id 名稱取元素
+    // 沒有取到時是 null
+    const title = document.getElementById('title')
+    // 元素.innerText 裡面的文字
+    console.log(`title 的文字是 ${title.innerText}`)
+    title.innerText = '<del>Title 被修改了</del>'
+
+    // 用標籤名稱取元素
+    // 取到的結果是陣列
+    const h2 = document.getElementsByTagName('h2')
+    console.log(h2)
+    console.log(h2.length + '個 h2')
+    // 元素.innerHTML 裡面的 HTML
+    console.log(h2[0].innerHTML)
+    console.log(h2[0].innerHTML.trim())
+    h2[1].innerHTML = '<del>123456</del>'
+    // HTMLCollection 不能使用 forEach
+    // h2.forEach(el => {
+    //   console.log(el.innerText)
+    // })
+    // Array.from 轉成一般陣列再使用 forEach
+    Array.from(h2).forEach(el => {
+      console.log(el.innerText)
+    })
+    // for of
+    for (const el of h2) {
+      console.log(el.innerText)
+    }
+
+    const red = document.getElementsByClassName('text-red')
+    for (const el of red) {
+      // 元素.style.樣式名稱
+      el.style.color = 'red'
+      console.log(el.style.color)
+    }
+
+    // querySelector(選擇器)    取第一個符合的
+    // querySelectorAll(選擇器) 取全部符合的
+    const center = document.querySelectorAll('.text-center')
+    for (const el of center) {
+      el.style.textAlign = 'center'
+      el.style['text-align'] = 'center'
+    }
+
+    const pink = document.querySelector('.text-pink')
+    // 空白，因為 .style 是取行內樣式
+    console.log(pink.style.color)
+    // 有東西
+    // getComputedStyle(元素, 偽元素) 取計算後的樣式
+    console.log(getComputedStyle(pink).color)
+    console.log(getComputedStyle(pink, '::before').color)
+
+    const fifth = document.querySelector('h4:nth-child(5)')
+    console.log(fifth)
+    fifth.style.textAlign = 'center'
+  </script>
+</body>
+</html>

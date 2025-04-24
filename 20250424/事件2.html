@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="button" value="btn1" id="btn1">
+  <input type="button" value="btn1-unbind" id="btn1-unbind">
+  <hr>
+  <input type="button" value="btns" class="btns">
+  <input type="button" value="btns" class="btns">
+  <input type="button" value="btns" class="btns">
+  <script>
+    const btn1 = document.getElementById('btn1')
+    
+    // btn.onclick = () => {}
+    // btn.onclick = function () {}
+    
+    // const func = () => {}
+    // btn.onclick = func
+    
+    btn1.onclick = () => {
+      btn1.value = 'ABCD'
+    }
+    
+    const btn1Unbind = document.getElementById('btn1-unbind')
+    btn1Unbind.onclick = () => {
+      // btn1.onclick = null
+      btn1.onclick = () => {
+        btn1.value = 'EFGH'
+      }
+    }
+
+    const btns = document.getElementsByClassName('btns')
+    // 無法直接對陣列綁定元素
+    // btns.onclick = () => {
+    //   alert(123)
+    // }
+    for (const el of btns) {
+      el.onclick = () => {
+        alert(123)
+      }
+    }
+  </script>
+</body>
+</html>

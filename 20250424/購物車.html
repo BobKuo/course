@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .card {
+      margin: 10px;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid black;
+      border-radius: 10px;
+      box-shadow: 5px 5px 3px gray;
+      width: 200px;
+      text-align: center;
+      display: inline-block;
+    }
+    .card > img {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="https://makeshop-multi-images.akamaized.net/redwave/itemimages/0000000040212_oesekfb.jpg" alt="">
+    <p class="card-title">SPD GAR 004</p>
+    <p class="card-price">2990</p>
+    <input type="button" value="加入購物車" class="card-btn" data-price="2990" data-name="SPD GAR 004">
+  </div>
+  <div class="card">
+    <img src="https://makeshop-multi-images.akamaized.net/redwave/itemimages/0000000025452_vJTACm0.jpg" alt="">
+    <p class="card-title">felys | Artcore Collection</p>
+    <p class="card-price">1320</p>
+    <input type="button" value="加入購物車" class="card-btn" data-price="1320" data-name="felys | Artcore Collection">
+  </div>
+  <div class="card">
+    <img src="https://makeshop-multi-images.akamaized.net/redwave/itemimages/0000000038802_hBlKoLr.jpg" alt="">
+    <p class="card-title">Waves of Euphoria 4</p>
+    <p class="card-price">4070</p>
+    <input type="button" value="加入購物車" class="card-btn" data-price="4070" data-name="Waves of Euphoria 4">
+  </div>
+  <hr>
+  <ul id="list"></ul>
+  <script>
+    const list = document.getElementById('list')
+    const btns = document.getElementsByClassName('card-btn')
+    for (const el of btns) {
+      el.onclick = () => {
+        const name = el.getAttribute('data-name')
+        const price = el.getAttribute('data-price')
+        list.insertAdjacentHTML('beforeend', `<li>${name}: ${price}</li>`)
+      }
+    }
+  </script>
+</body>
+</html>

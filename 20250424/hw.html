@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #show {
+            width: 200px;
+            height: 200px;
+            background: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="show"></div>
+    <!-- R -->
+    <span>R</span>
+    <input type="range" id="r-scroll" value="0" min="0" max="255">
+    <span id="r-text">0</span>
+    <button id="r-btn">隨機</button>
+    <br>
+    <!-- G -->
+    <span>G</span>
+    <input type="range" id="g-scroll" value="0" min="0" max="255">
+    <span id="g-text">0</span>
+    <button id="g-btn">隨機</button>
+    <br>
+    <!-- B -->
+    <span>B</span>
+    <input type="range" id="b-scroll" value="0" min="0" max="255">
+    <span id="b-text">0</span>
+    <button id="b-btn">隨機</button>
+
+    <script>
+        const show_area = document.getElementById('show')
+
+        const r_scroll = document.getElementById('r-scroll')
+        const r_text = document.getElementById('r-text')
+        const r_btn = document.getElementById('r-btn')
+
+        const g_scroll = document.getElementById('g-scroll')
+        const g_text = document.getElementById('g-text')
+        const g_btn = document.getElementById('g-btn')
+
+        const b_scroll = document.getElementById('b-scroll')
+        const b_text = document.getElementById('b-text')
+        const b_btn = document.getElementById('b-btn')
+
+        r_scroll.oninput = function () {
+            r_text.innerText = this.value
+            show_area.style.background = `rgb(${r_text.innerText},${g_text.innerText},${b_text.innerText})`
+        }
+        g_scroll.oninput = function () {
+            g_text.innerText = this.value
+            show_area.style.background = `rgb(${r_text.innerText},${g_text.innerText},${b_text.innerText})`
+        }
+        b_scroll.oninput = function () {
+            b_text.innerText = this.value
+            show_area.style.background = `rgb(${r_text.innerText},${g_text.innerText},${b_text.innerText})`
+        }
+
+        r_btn.onclick = () => {
+            const rdn = Math.round(255 * Math.random())
+            r_text.innerText = rdn
+            r_scroll.value = rdn
+            show_area.style.background = `rgb(${r_text.innerText},${g_text.innerText},${b_text.innerText})`
+        }
+
+        g_btn.onclick = () => {
+            const rdn = Math.round(255 * Math.random())
+            g_text.innerText = rdn
+            g_scroll.value = rdn
+            show_area.style.background = `rgb(${r_text.innerText},${g_text.innerText},${b_text.innerText})`
+        }
+
+        b_btn.onclick = () => {
+            const rdn = Math.round(255 * Math.random())
+            b_text.innerText = rdn
+            b_scroll.value = rdn
+            show_area.style.background = `rgb(${r_text.innerText},${g_text.innerText},${b_text.innerText})`
+        }
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #palette {
+            width: 220px;
+            height: 220px;
+
+            border: 1px solid #000;
+            background: rgb(0, 0, 0)
+        }
+
+        #text_r,
+        #text_g,
+        #text_b {
+            display: inline-block;
+            width: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="palette"></div>
+    <div>
+        <span>R</span>
+        <input type="range" name="R" id="scroll_r" value="0" min="0" max="255" step="1">
+        <span id="text_r">0</span>
+        <button>隨機</button>
+    </div>
+    <div>
+        <span>G</span>
+        <input type="range" name="G" id="scroll_g" value="0" min="0" max="255" step="1">
+        <span id="text_g">0</span>
+        <button>隨機</button>
+    </div>
+    <div>
+        <span>B</span>
+        <input type="range" name="B" id="scroll_b" value="0" min="0" max="255" step="1">
+        <span id="text_b">0</span>
+        <button>隨機</button>
+    </div>
+
+    <script>
+        const palette = document.getElementById('palette')
+
+        const r_scroll = document.getElementById('scroll_r')
+        const g_scroll = document.getElementById('scroll_g')
+        const b_scroll = document.getElementById('scroll_b')
+
+        const r_text = document.getElementById('text_r')
+        const g_text = document.getElementById('text_g')
+        const b_text = document.getElementById('text_b')
+
+        r_scroll.oninput = function () {
+            r_text.innerText = this.value
+            palette.style.background = `rgb(${r_text.innerText}, ${g_text.innerText}, ${b_text.innerText})`
+        }
+        g_scroll.oninput = function () {
+            g_text.innerText = this.value
+            palette.style.background = `rgb(${r_text.innerText}, ${g_text.innerText}, ${b_text.innerText})`
+        }
+        b_scroll.oninput = function () {
+            b_text.innerText = this.value
+            palette.style.background = `rgb(${r_text.innerText}, ${g_text.innerText}, ${b_text.innerText})`
+        }
+
+
+    </script>
+</body>
+
+</html>

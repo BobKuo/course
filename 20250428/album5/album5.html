@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background: #ffc;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-family: "標楷體";
+      font-weight: bolder;
+      color: #00f;
+      text-decoration: underline;
+    }
+
+    table {
+      margin: auto;
+    }
+
+    /* 大圖樣式 */
+    #big {
+      width: 400px;
+      height: 300px;
+      border: 5px solid #00f;
+    }
+
+    /* 小圖樣式 */
+    .small {
+      width: 60px;
+      height: 45px;
+      border: medium solid #00f;
+    }
+
+    .small:hover {
+      /* 滑鼠變成手指頭 */
+      cursor: pointer;
+      border: medium solid #0ff;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>蘭嶼賞魚去</h1>
+  <!-- table>tr*3>td*5 -->
+  <table>
+    <tr>
+      <td colspan="5"><img id="big" src="../images/0551.jpg"></td>
+    </tr>
+    <tr>
+      <!-- 加 br 讓空間大一點 -->
+      <td><br></td>
+      <td><br></td>
+      <td><br></td>
+      <td><br></td>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td><img class="small" src="../images/0551.jpg"></td>
+      <td><img class="small" src="../images/0552.jpg"></td>
+      <td><img class="small" src="../images/0553.jpg"></td>
+      <td><img class="small" src="../images/0554.jpg"></td>
+      <td><img class="small" src="../images/0555.jpg"></td>
+    </tr>
+  </table>
+  <script src="../jquery-2.1.4.min.js"></script>
+  <script>
+    // $('.small').each(function (index, img) {
+    //   // 對每一個做點擊 click 的事件，做小圖換大圖
+    //   $(img).on('click', function () {
+    //     $('#big').attr('src', `../images/055${index + 1}.jpg`)
+    //   })
+    //   // $(img).click(function(){})
+    // })
+
+    // 對所有的 .small 圖片加上 click 事件
+    $('.small').on('click', function () {
+      // this 可以指向到該點擊的元素
+      // console.log(this)
+      let small_pic = $(this).attr('src') // getter，對該元素的 src 取值
+      // console.log(small_pic)
+      $('#big').attr('src', small_pic) // setter，對該元素的 src 設定值
+    })
+  </script>
+</body>
+
+</html>

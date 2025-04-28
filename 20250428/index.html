@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>書曼的旅遊相簿</title>
+  <style>
+    body {
+      background: #333;
+    }
+
+    #main {
+      width: 1024px;
+      height: 768px;
+      margin: auto;
+      background: #ffc;
+    }
+
+    #left {
+      width: 150px;
+      height: 768px;
+      float: left;
+      /* background: lavender; */
+    }
+
+    #right {
+      width: calc(1024px - 150px);
+      height: 768px;
+      float: right;
+      /* background: lightgreen; */
+    }
+
+    marquee {
+      width: calc(1024px - 150px);
+      height: 50px;
+      font-size: 24px;
+      font-weight: bolder;
+      font-family: "標楷體";
+      color: #f00;
+      /* 水平置中 */
+      text-align: center;
+      /* 垂直置中 */
+      line-height: 50px;
+    }
+
+    #content {
+      /* 在 box-sizing 預設下，padding 是要扣除，72px 是扣除 padding */
+      width: calc(1024px - 150px - 72px);
+      height: calc(768px - 50px - 72px);
+      padding: 36px;
+    }
+
+    #left {
+      text-align: center;
+    }
+
+    #left table {
+      margin: auto;
+    }
+
+    iframe {
+      width: calc(1024px - 150px - 72px);
+      height: calc(768px - 50px - 72px);
+    }
+
+    /* 程式有問題無法 debug 時服用，是有風險的 */
+    /* #left .img:hover {
+      filter: hue-rotate(120deg);
+    } */
+
+    .info {
+      font-size: 12px;
+      font-weight: bold;
+      font-family: "新細明體";
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 音樂 -->
+  <audio src="./music/0501.mp3" autoplay></audio>
+  <div id="main">
+    <div id="left">
+      <!-- table>tr*12>td -->
+      <table>
+        <tr>
+          <td><img src="./images/0508.gif" alt="書曼的旅遊相簿" title="書曼的旅遊相簿"></td>
+        </tr>
+        <tr>
+          <td><img src="./images/0507.jpg" alt="書曼" title="書曼"></td>
+        </tr>
+        <!-- 第 3 列空 -->
+        <tr>
+          <!-- &nbsp; -->
+          <td><br></td>
+        </tr>
+        <tr>
+          <td><img class="img" src="./images/0501b.gif" alt="金門逍遙遊" title="金門逍遙遊"></td>
+        </tr>
+        <tr>
+          <td><img class="img" src="./images/0502b.gif" alt="卡蹓到馬祖" title="卡蹓到馬祖"></td>
+        </tr>
+        <tr>
+          <td><img class="img" src="./images/0503b.gif" alt="踏浪澎湖行" title="踏浪澎湖行"></td>
+        </tr>
+        <tr>
+          <td><img class="img" src="./images/0504b.gif" alt="綠島唱夜曲" title="綠島唱夜曲"></td>
+        </tr>
+        <tr>
+          <!-- album5.html 要自己建立在 album5 資料夾 -->
+          <td><a href="./album5/album5.html" target="iframe"><img class="img img5" src="./images/0505b.gif" alt="蘭嶼賞魚去" title="蘭嶼賞魚去"></a></td>
+        </tr>
+        <!-- 第 9 列空 -->
+        <tr>
+          <td><br></td>
+        </tr>
+        <tr>
+          <td class="info">
+            日期：2025/04/28<br>
+            維護：00張凱富
+          </td>
+        </tr>
+        <!-- 第 11 列空 -->
+        <tr>
+          <td><br></td>
+        </tr>
+        <tr>
+          <td><a href="./index.html"><img class="img" src="./images/0506b.gif" alt="回首頁" title="回首頁"></a></td>
+        </tr>
+      </table>
+    </div>
+    <div id="right">
+      <marquee>歡迎來到書曼的旅遊相簿，本網站有我的旅遊影像紀錄介紹耶！</marquee>
+      <div id="content">
+        <iframe src="./main.html" frameborder="0" name="iframe"></iframe>
+      </div>
+    </div>
+  </div>
+  <script src="./jquery-2.1.4.min.js"></script>
+  <script>
+    // 1. 抓所有 .img 的圖片，然後跑回圈做事情
+    // 2. 做的事情是，滑鼠"移入"換圖片，"移開"換回來
+    // $('.img')
+    console.log($('.img'))
+
+    $('.img').each(function (index, img) {
+      // 參數是兩個 function，第一個是移入，第二個是移開
+      $(img).hover(function () {
+        // 換紅色字的圖片 attr => attribute
+        // $(img).attr('src', `./images/050${index + 1}r.gif`)
+        console.log(index, img)
+        // ./images/0501r.gif
+        // ./images/0502r.gif
+        // ./images/0503r.gif
+        // ./images/0504r.gif
+        // ./images/0505r.gif
+        // ./images/0506r.gif
+        // attr('屬性','值')
+        $(img).attr('src', `./images/050${index + 1}r.gif`)
+      }, function () {
+        // 換回藍色字的圖片
+        $(img).attr('src', `./images/050${index + 1}b.gif`)
+      })
+    })
+  </script>
+</body>
+
+</html>

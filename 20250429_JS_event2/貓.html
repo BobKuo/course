@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #game {
+      width: 1500px;
+      height: 800px;
+      border: 1px solid black;
+      position: relative;
+      box-sizing: border-box;
+    }
+    #cat {
+      position: absolute;
+      width: 300px;
+      /* 停用反白選取 */
+      user-select: none;
+      /* 停用圖片拖曳 */
+      -webkit-user-drag: none;
+    }
+  </style>
+</head>
+<body>
+  <input type="button" value="開始遊戲" id="start">
+  <span id="time">0</span>
+  <hr>
+  <div id="game">
+    <img src="./cat.jpg" id="cat">
+  </div>
+  <script>
+    const elStart = document.getElementById('start')
+    const elTime = document.getElementById('time')
+    const elGame = document.getElementById('game')
+    const elCat = document.getElementById('cat')
+
+    // 聲音
+    const audio = new Audio()
+    audio.src = './meow.mp3'
+
+    // 遊戲經過時間，單位 10 毫秒
+    let time = 0
+    // 計時器
+    let timer = 0
+    // 貓的中心點座標
+    const catPos = {
+      x: 0,
+      y: 0
+    }
+
+    // game 區塊內最長的距離就是對角線
+    const gameMaxDistance = 
+      Math.sqrt(
+        Math.pow(elGame.offsetWidth, 2) + 
+        Math.pow(elGame.offsetHeight, 2) 
+      )
+
+    let inGame = false
+
+    elStart.onclick = () => {
+      // 狀態設定為遊戲中
+      inGame = true
+      // 停用開始按鈕
+      elStart.disabled = true
+      // 重置
+      time = 0
+      elCat.style.opacity = 0
+      // 隨機放貓
+      elCat.style.left = Math.round(Math.random() * (elGame.clientWidth - elCat.offsetWidth)) + 'px'
+      elCat.style.top = Math.round(Math.random() * (elGame.clientHeight - elCat.offsetHeight)) + 'px'
+      // 貓的中心點
+      catPos.x = elCat.offsetLeft + (elCat.offsetWidth / 2)
+      catPos.y = elCat.offsetTop + (elCat.offsetHeight / 2)
+      // 開始計時
+      timer = setInterval(() => {
+        // 修改時間
+        time++
+        elTime.innerText = time / 100
+
+        if (time % 200 === 0) {
+          audio.play()
+        }
+      }, 10)
+    }
+
+    elGame.onmousemove = (event) => {
+      if (!inGame)  return
+
+      // console.log(event.offsetX, event.offsetY, event.target)
+
+      // 計算滑鼠離貓的中心點距離
+      // 滑鼠在貓上的時候，event.target 就是貓，距離為 0
+      // 不在貓上才算距離
+      let distance = 0
+      if (event.target !== elCat) {
+        distance = 
+          Math.sqrt(
+            Math.pow(event.offsetX - catPos.x, 2) + 
+            Math.pow(event.offsetY - catPos.y, 2) 
+          )
+      }
+      // 調整音量
+      audio.volume = 1 - distance / gameMaxDistance
+    }
+
+    elCat.onclick = () => {
+      if (!inGame)  return
+
+      elCat.style.opacity = 1
+      clearInterval(timer)
+      elStart.disabled = false
+    }
+  </script>
+</body>
+</html>

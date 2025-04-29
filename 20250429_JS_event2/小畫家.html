@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #canvas {
+      outline: 1px solid black
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="500" height="500"></canvas>
+  <input type="color" id="input-color">
+  <input type="range" id="input-size" min="1" max="100" value="10">
+  <script>
+    const canvas = document.getElementById('canvas')
+    // 取得 canvas 的 2d 繪圖參數
+    const ctx = canvas.getContext('2d')
+
+    const inputColor = document.getElementById('input-color')
+    const inputSize = document.getElementById('input-size')
+
+    // 紀錄上一個滑鼠座標
+    const previousMousePos = {
+      x: 0,
+      y: 0
+    }
+    // 滑鼠是不是按著
+    let isMousedown = false
+
+    // 畫矩形
+    // fillRect(左上角 X 座標, 左上角 Y 座標, 寬, 高)
+    // fillStyle = 填滿顏色
+    ctx.fillStyle = 'white'
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+    canvas.onmousedown = (event) => {
+      previousMousePos.x = event.offsetX
+      previousMousePos.y = event.offsetY
+      isMousedown = true
+    }
+    canvas.onmouseup = (event) => {
+      isMousedown = false
+    }
+    canvas.onmouseleave= (event) => {
+      isMousedown = false
+    }
+    canvas.onmousemove = (event) => {
+      if (!isMousedown) return
+      // 線條顏色
+      ctx.strokeStyle = inputColor.value
+      // 線條寬度
+      ctx.lineWidth = inputSize.value
+      // 線條圓角
+      ctx.lineCap = 'round'
+      // 線條連接處圓角
+      ctx.lineJoin = 'round'
+      // 開始畫線
+      ctx.beginPath()
+      // 移動到上一個滑鼠座標
+      ctx.moveTo(previousMousePos.x, previousMousePos.y)
+      // 畫到目前的滑鼠座標
+      ctx.lineTo(event.offsetX, event.offsetY)
+      // 畫出來
+      ctx.stroke()
+      // 記錄目前的滑鼠座標
+      previousMousePos.x = event.offsetX
+      previousMousePos.y = event.offsetY
+    }
+  </script>
+</body>
+</html>
